@@ -1,29 +1,20 @@
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-@TestInstance(Lifecycle.PER_CLASS)
 public class MathUtilsTest {
     MathUtils mathUtils;
     
-    @BeforeAll
-    void beforeAllInit(){
-        System.out.println("This needs to run before all");
-    }
     @BeforeEach
     void init(){
         mathUtils = new MathUtils();
     }
-    @AfterEach
-    void cleanUp(){
-        System.out.println("Cleaning up...");
-    }
     @Test
+    @DisplayName("Testing add method")
     void testAdd(){        
         int expect = 2;
         int reality = mathUtils.add(1, 1);
@@ -36,5 +27,11 @@ public class MathUtilsTest {
     @Test
     void testDivide(){        
         assertThrows(ArithmeticException.class, ()-> mathUtils.divide(1, 0), "divide by zero should throw");
+    }
+    @Test
+    @Disabled
+    @DisplayName("TDD method. Should not run")
+    void testDisabled(){        
+        fail("No mather what, this test is fail");
     }
 }
