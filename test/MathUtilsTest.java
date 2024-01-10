@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
@@ -17,7 +18,7 @@ public class MathUtilsTest {
         mathUtils = new MathUtils();
     }
     @Test
-    @DisplayName("Testing add method")
+    @DisplayName(value = "testing add method")
     void testAdd(){        
         int expect = 2;
         int reality = mathUtils.add(1, 1);
@@ -36,8 +37,17 @@ public class MathUtilsTest {
     }
     @Test
     @Disabled
-    @DisplayName("TDD method. Should not run")
+    @DisplayName(value = "TDD method. Should not run")
     void testDisabled(){        
         fail("No mather what, this test is fail");
+    }
+    @Test
+    @DisplayName(value = "multiply method")
+    void testMultiply(){
+        assertAll(
+            () -> assertEquals(4, mathUtils.multiply(2, 2)),
+            () -> assertEquals(0, mathUtils.multiply(2, 0)),
+            () -> assertEquals(-2, mathUtils.multiply(2, -1))
+        );
     }
 }
