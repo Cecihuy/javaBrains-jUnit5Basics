@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -6,9 +8,17 @@ import org.junit.jupiter.api.Test;
 public class MathUtilsTest {
     MathUtils mathUtils;
     
+    @BeforeAll
+    static void beforeAllInit(){
+        System.out.println("This needs to run before all");
+    }
     @BeforeEach
     void init(){
         mathUtils = new MathUtils();
+    }
+    @AfterEach
+    void cleanUp(){
+        System.out.println("Cleaning up...");
     }
     @Test
     void testAdd(){        
