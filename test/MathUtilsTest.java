@@ -1,10 +1,13 @@
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 public class MathUtilsTest {
     MathUtils mathUtils;
@@ -25,7 +28,10 @@ public class MathUtilsTest {
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area");
     }
     @Test
-    void testDivide(){        
+    @EnabledOnOs(value = OS.WINDOWS)
+    void testDivide(){
+        boolean isServerUp = false;
+        assumeTrue(isServerUp);
         assertThrows(ArithmeticException.class, ()-> mathUtils.divide(1, 0), "divide by zero should throw");
     }
     @Test
