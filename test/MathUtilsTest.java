@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
+@DisplayName(value = "when running MathUtils")
 public class MathUtilsTest {
     MathUtils mathUtils;
     
@@ -17,13 +19,20 @@ public class MathUtilsTest {
     void init(){
         mathUtils = new MathUtils();
     }
-    @Test
-    @DisplayName(value = "testing add method")
-    void testAdd(){        
-        int expect = 2;
-        int reality = mathUtils.add(1, 1);
-        assertEquals(expect, reality, "The add method should add two numbers");
-    }
+    @Nested
+    @DisplayName(value = "add method")
+    class AddTest{
+        @Test
+        @DisplayName(value = "when adding two positive numbers")
+        void testAddPositive(){
+            assertEquals(2, mathUtils.add(1, 1), "should return the right sum");
+        }
+        @Test
+        @DisplayName(value = "when adding two negative numbers")
+        void testAddNegative(){
+            assertEquals(-1, mathUtils.add(-1, -1), "should return the right sum");
+        }
+    }    
     @Test
     void testComputeCircleRadius(){        
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area");
