@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -30,13 +32,14 @@ public class MathUtilsTest {
         @Test
         @DisplayName(value = "when adding two negative numbers")
         void testAddNegative(){
-            int expect = -3;
+            int expect = -2;
             int reality = mathUtils.add(-1, -1);
             assertEquals(expect, reality, () -> "should return sum " + expect + " but returned " + reality);
         }
-    }    
-    @Test
-    void testComputeCircleRadius(){        
+    }
+    @RepeatedTest(value = 3)
+    void testComputeCircleRadius(RepetitionInfo repetitionInfo){    //this argument is additional option
+        repetitionInfo.getCurrentRepetition();      //this code is optional is additional option
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area");
     }
     @Test
