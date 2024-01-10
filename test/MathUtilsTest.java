@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -23,6 +23,7 @@ public class MathUtilsTest {
     }
     @Nested
     @DisplayName(value = "add method")
+    @Tag(value = "Math")
     class AddTest{
         @Test
         @DisplayName(value = "when adding two positive numbers")
@@ -38,12 +39,13 @@ public class MathUtilsTest {
         }
     }
     @RepeatedTest(value = 3)
-    void testComputeCircleRadius(RepetitionInfo repetitionInfo){    //this argument is additional option
-        repetitionInfo.getCurrentRepetition();      //this code is optional is additional option
+    @Tag(value = "Circle")
+    void testComputeCircleRadius(){
         assertEquals(314.1592653589793, mathUtils.computeCircleArea(10), "Should return right circle area");
     }
     @Test
     @EnabledOnOs(value = OS.WINDOWS)
+    @Tag(value = "Math")
     void testDivide(){
         boolean isServerUp = false;
         assumeTrue(isServerUp);
@@ -56,6 +58,7 @@ public class MathUtilsTest {
         fail("No mather what, this test is fail");
     }
     @Test
+    @Tag(value = "Math")
     @DisplayName(value = "multiply method")
     void testMultiply(){
         assertAll(
